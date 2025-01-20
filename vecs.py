@@ -9,6 +9,10 @@ class vec:
         if not len(self.value) == len(vec2.value): raise ValueError("vectors must have the same length")
         value = [a+b for a, b in zip(self.value, vec2.value)]
         return vec(value)
+
+    def scale(self, scalar):
+        for idx, i in enumerate(self.value):
+            self.value[idx] = scalar*i
     
     def dotP(self, vec2):
         val2 = vec2
