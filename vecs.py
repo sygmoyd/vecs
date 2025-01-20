@@ -10,6 +10,11 @@ class vec:
         value = [a+b for a, b in zip(self.value, vec2.value)]
         return vec(value)
 
+    def __sub__(self, vec2):
+        if not len(self.value) == len(vec2.value): raise ValueError("vectors must have the same length")
+        value = [a-b for a,b in zip(self.value, vec2.value)]
+        return vec(value)
+
     def scale(self, scalar):
         for idx, i in enumerate(self.value):
             self.value[idx] = scalar*i
@@ -23,6 +28,11 @@ class vec:
             s += a*b
         return s
 
+    def Norm(self, vec2, innerProduct=None):
+        if innerProduct == None: innerProduct = self.dotP
+        s = innerProduct(vec2)
+        return s ** 0.5
+    
     def l1Norm(self):
         s = 0
         for i in self.value:
@@ -30,5 +40,4 @@ class vec:
         return s
     
     def l2Norm(self):
-        s = self.dotP(self.value)
-        return s ** 0.5
+        return self.Norm(self.value) 
