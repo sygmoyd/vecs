@@ -28,6 +28,3 @@ class vec:
     def l2Norm(self):
         s = self.dotP(self.value)
         return s ** 0.5
-    
-v = vec([1])
-print(v.l2Norm())
