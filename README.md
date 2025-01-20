@@ -1,2 +1,2 @@
 # vecs
-a python implementation of geometrical vectors
+a python implementation of real-valued vectors
