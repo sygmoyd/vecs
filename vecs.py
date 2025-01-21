@@ -66,3 +66,9 @@ class vec:
         cos_val = numerator/denumerator
         if deg: return math.degrees(math.acos(cos_val))
         return cos_val
+
+    def dist(self, vec2, innerProductCalc=None):
+        innerProduct = None
+        if innerProductCalc == None: innerProduct = InnerProduct(dotPCalc)
+        else: innerProduct = InnerProduct(innerProductCalc)
+        return math.sqrt(innerProduct.func(vec1=(vec(self.value)-vec2),vec2=(vec(self.value)-vec2)))
