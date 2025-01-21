@@ -1,3 +1,5 @@
+import math
+
 class vec:
     def __init__(self, value=[]):
         if value == []: self.value = [];return 
@@ -20,17 +22,17 @@ class vec:
             self.value[idx] = scalar*i
     
     def dotP(self, vec2):
-        val2 = vec2
-        if type(vec2) is vec:
-            val2 = vec2.value
+        if not type(vec2) is vec:
+            vec2 = vec(vec2)
+        if not len(self.value) == len(vec2.value): raise ValueError("vectors must have the same length")
         s = 0
-        for a,b in zip(self.value, val2):
+        for a,b in zip(self.value, vec2.value):
             s += a*b
         return s
 
-    def Norm(self, vec2, innerProduct=None):
+    def Norm(self, innerProduct=None):
         if innerProduct == None: innerProduct = self.dotP
-        s = innerProduct(vec2)
+        s = innerProduct(self.value)
         return s ** 0.5
     
     def l1Norm(self):
@@ -40,4 +42,14 @@ class vec:
         return s
     
     def l2Norm(self):
-        return self.Norm(self.value) 
+        return self.Norm()
+
+    def Angle(self, vec2, innerProduct=None, deg=True):
+        if innerProduct == None: numerator=self.dotP(vec2)
+        else: numerator=innerProduct(vec2)
+        vec1Norm = self.Norm(innerProduct=innerProduct)
+        vec2Norm = vec2.Norm(innerProduct=innerProduct)
+        denumerator=vec1Norm*vec2Norm
+        cos_val = numerator/denumerator
+        if deg: return math.degrees(math.acos(cos_val))
+        return cos_val
